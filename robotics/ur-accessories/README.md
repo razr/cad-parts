@@ -1,6 +1,6 @@
-# Universal Robots Wrist & Tool Accessories
+# Universal Robots Wrist & Control Box Accessories
 
-Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Robots e-Series (`UR3e`, `UR5e`, `UR10e`, `UR16e`) wrist accessories and protective caps.
+Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Robots (`CB-Series` & `e-Series`) wrist accessories and control box hardware.
 
 ---
 
@@ -10,16 +10,18 @@ Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Ro
 ur-accessories/
 ├── README.md
 ├── scad/
-│   └── m8_connector_cap.scad    # Parametric M8 x 1.0 threaded protective dust cap
+│   ├── m8_connector_cap.scad     # Parametric M8 x 1.0 threaded protective dust cap
+│   └── ur_control_box_key.scad   # Rittal double-bit (3 mm / 5 mm) control box cabinet key
 └── stl/
-    └── m8_connector_cap.stl     # Compiled 3D mesh for slicing / GitHub 3D preview
+    ├── m8_connector_cap.stl
+    └── ur_control_box_key.stl
 ```
 
 ---
 
 ## Parts Included
 
-### M8 × 1.0 Threaded Tool Connector Dust Cap (`m8_connector_cap.scad`)
+### 1. M8 × 1.0 Threaded Tool Connector Dust Cap (`m8_connector_cap.scad`)
 
 Protective screw-on dust cap for the **8-pin M8 tool I/O connector** (IEC 61076-2-104) located on the Wrist 3 housing of Universal Robots e-Series arms when no tool cable is attached.
 
@@ -30,8 +32,23 @@ Protective screw-on dust cap for the **8-pin M8 tool I/O connector** (IEC 61076-
 | **Outer Diameter** | **Ø 12.0 mm** (knurled) | Ribbed perimeter grip with optional side tether eyelet (`add_tether_loop = true`) |
 | **Thread Clearance (`thread_clearance`)** | **0.25 mm** radial offset | Tuned for clean thread engagement off a 0.4 mm FDM nozzle |
 
-#### 3D Printing Recommendations (Bambu Studio / OrcaSlicer)
+#### 3D Printing Recommendations
 * **Layer Height:** **0.12 mm** or **0.16 mm** (fine layer height ensures clean **1.0 mm** pitch threads).
 * **Material:** **PETG**, **ASA**, or **TPU 95A** (print flat on the closed end face with **zero supports**).
-* **Tuning Fit:** If the printed cap feels slightly tight or loose on your specific metal connector, adjust `thread_clearance` in `m8_connector_cap.scad` in `0.05 mm` steps and re-run `./scripts/render_stl.sh`.
 
+---
+
+### 2. UR Control Box Cabinet Key (`ur_control_box_key.scad`)
+
+Replacement **Rittal double-bit** cabinet key (`SZ 2531.000` style) for opening Universal Robots CB-Series and e-Series control box enclosures.
+
+| Parameter | Value / Options | Notes |
+| :--- | :--- | :--- |
+| **Key Variant (`key_variant`)** | **`"3mm"`** *(default)* / **`"5mm"`** | `"3mm"` is standard for Universal Robots control boxes; `"5mm"` fits larger Rittal industrial cabinets |
+| **Barrel Outer Diameter** | **Ø 9.0 mm** | Fits into standard Ø 10.0 mm cam lock housings |
+| **Center Guide Bore** | **Ø 5.3 mm × 14.0 mm deep** | Clears the center alignment pin inside the lock cylinder |
+| **Double-Bit Wing Span** | **13.0 mm** tip-to-tip | **2.75 mm** (`"3mm"` variant) or **4.75 mm** (`"5mm"` variant) blade thickness with 0.25 mm print clearance |
+
+#### 3D Printing Recommendations
+* **Orientation:** Print **flat on its side** on the build plate (as modeled) so continuous filament loops run along the shaft and resist twisting torque.
+* **Strength Settings:** Use **PETG**, **PETG-CF**, or **ASA** with **5 perimeter walls** and **100% infill**.
