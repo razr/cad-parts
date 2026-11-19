@@ -2,10 +2,14 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE}")/.." && pwd)"
-
-# Use the passed file/folder path if provided; otherwise default to the current directory (or REPO_ROOT)
 TARGET="${1:-.}"
 TARGET_PATH="$(realpath "$TARGET")"
+
+# Auto-select ~/.venv-cad Python if available, otherwise fall back to system python3
+PYTHON_BIN="python3"
+if [ -x "$HOME/.venv-cad/bin/python3" ]; then
+    PYTHON_BIN="$HOME/.venv-cad/bin/python3"
+fi
 
 # 1. Render OpenSCAD (.scad) files -> .stl
 if command -v openscad >/dev/null 2>&1; then
