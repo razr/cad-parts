@@ -34,7 +34,7 @@ chmod +x scripts/render_stl.sh
 ./scripts/render_stl.sh -f robotics/ur5-camera-mount
 ```
 
-The script automatically scans `*/scad/` (skipping `*assembly*.scad` files) and `*/step/` directories, skipping existing meshes unless `-f` is specified.
+The script automatically scans `*/scad/` and `*/step/` directories, skipping existing meshes unless `-f` is specified.
 
 ## Projects
 

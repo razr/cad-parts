@@ -59,6 +59,6 @@ deactivate
 ```
 
 ### How It Works
-* **OpenSCAD (`*/scad/*.scad`):** Compiles every `.scad` file (skipping `*assembly*.scad` files) into `../stl/<name>.stl`.
+* **OpenSCAD (`*/scad/*.scad`):** Compiles every `.scad` file into `../stl/<name>.stl`.
 * **STEP (`*/step/*.step` & `*.stp`):** Tessellates B-Rep STEP models into `../stl/<name>.stl` (`tolerance=0.1`, `angularTolerance=0.2`) for fast slicing and GitHub 3D previewing.
 

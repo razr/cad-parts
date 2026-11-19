@@ -27,9 +27,9 @@ if [ -x "$HOME/.venv-cad/bin/python3" ]; then
     PYTHON_BIN="$HOME/.venv-cad/bin/python3"
 fi
 
-# 1. Render OpenSCAD (.scad) files -> .stl
+# 1. Render ALL OpenSCAD (.scad) files -> .stl
 if command -v openscad >/dev/null 2>&1; then
-    find "$TARGET_PATH" -type f -path "*/scad/*.scad" ! -name "*assembly*.scad" | while read -r scad_file; do
+    find "$TARGET_PATH" -type f -path "*/scad/*.scad" | while read -r scad_file; do
         stl_dir="$(dirname "$(dirname "$scad_file")")/stl"
         base_name="$(basename "$scad_file" .scad)"
         stl_file="$stl_dir/$base_name.stl"
@@ -47,7 +47,7 @@ else
     echo "[SKIP] 'openscad' is not installed"
 fi
 
-# 2. Convert STEP (.step / .STEP / .stp / .STP) files -> .stl (via Python cadquery)
+# 2. Convert ALL STEP (.step / .STEP / .stp / .STP) files -> .stl (via Python cadquery)
 if "$PYTHON_BIN" -c "import cadquery" >/dev/null 2>&1; then
     find "$TARGET_PATH" -type f \( -path "*/step/*.step" -o -path "*/step/*.STEP" -o -path "*/step/*.stp" -o -path "*/step/*.STP" \) | while read -r step_file; do
         stl_dir="$(dirname "$(dirname "$step_file")")/stl"
