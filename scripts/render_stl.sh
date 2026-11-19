@@ -2,7 +2,23 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE}")/.." && pwd)"
-TARGET="${1:-.}"
+FORCE=false
+TARGET="."
+
+# Parse optional -f / --force flag and target path
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -f|--force)
+            FORCE=true
+            shift
+            ;;
+        *)
+            TARGET="$1"
+            shift
+            ;;
+    esac
+done
+
 TARGET_PATH="$(realpath "$TARGET")"
 
 # Auto-select ~/.venv-cad Python if available, otherwise fall back to system python3
@@ -17,6 +33,11 @@ if command -v openscad >/dev/null 2>&1; then
         stl_dir="$(dirname "$(dirname "$scad_file")")/stl"
         base_name="$(basename "$scad_file" .scad)"
         stl_file="$stl_dir/$base_name.stl"
+
+        if [ "$FORCE" = false ] && [ -f "$stl_file" ]; then
+            echo "[SCAD] Skipping existing: ${stl_file#"$REPO_ROOT"/}"
+            continue
+        fi
 
         mkdir -p "$stl_dir"
         echo "[SCAD] Rendering: ${scad_file#"$REPO_ROOT"/} -> ${stl_file#"$REPO_ROOT"/}"
@@ -33,6 +54,11 @@ if "$PYTHON_BIN" -c "import cadquery" >/dev/null 2>&1; then
         base_name="$(basename "${step_file%.*}")"
         stl_file="$stl_dir/$base_name.stl"
 
+        if [ "$FORCE" = false ] && [ -f "$stl_file" ]; then
+            echo "[STEP] Skipping existing: ${stl_file#"$REPO_ROOT"/}"
+            continue
+        fi
+
         mkdir -p "$stl_dir"
         echo "[STEP] Converting: ${step_file#"$REPO_ROOT"/} -> ${stl_file#"$REPO_ROOT"/}"
         "$PYTHON_BIN" -c "import cadquery as cq; s = cq.importers.importStep('$step_file'); cq.exporters.export(s, '$stl_file', tolerance=0.1, angularTolerance=0.2)"
@@ -42,3 +68,4 @@ else
 fi
 
 echo "Done!"
+

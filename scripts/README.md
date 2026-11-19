@@ -28,19 +28,25 @@ Make the script executable once:
 chmod +x scripts/render_stl.sh
 ```
 
-### Run Directly (Auto-Detects `~/.venv-cad`)
-`render_stl.sh` automatically checks for `$HOME/.venv-cad/bin/python3`, so you can run it directly without activating the environment:
+### Generate Only New / Missing STL Files (Default)
+By default, `render_stl.sh` skips any `.stl` file that already exists and only compiles missing files. It automatically detects `$HOME/.venv-cad/bin/python3`, so no manual environment activation is required:
 
 ```bash
-# From the repository root:
-./scripts/render_stl.sh sensors/orbbec-gemini-335Lg
-./scripts/render_stl.sh robotics/ur-accessories/scad/m8_connector_cap.scad
+# From the repository root (renders only missing .stl files):
+./scripts/render_stl.sh .
+./scripts/render_stl.sh robotics/ur5-camera-mount
 
 # From inside a project folder:
 ../../scripts/render_stl.sh
+```
 
-# Render the entire repository:
-./scripts/render_stl.sh .
+### Force Re-Rendering Existing STL Files (`-f` / `--force`)
+Pass `-f` (or `--force`) before or after the target path to overwrite and regenerate existing `.stl` files:
+
+```bash
+./scripts/render_stl.sh -f
+./scripts/render_stl.sh -f robotics/ur5-camera-mount
+./scripts/render_stl.sh robotics/ur-accessories/scad/m8_connector_cap.scad -f
 ```
 
 ### Run with Manual Environment Activation

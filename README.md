@@ -8,6 +8,7 @@ A collection of parametric **OpenSCAD** models, ready-to-print **STL** meshes, a
 cad-parts/
 ├── README.md
 ├── scripts/
+│   ├── README.md
 │   └── render_stl.sh                        # Batch-compiles .scad and .step/.stp files into .stl meshes
 ├── robotics/
 │   ├── ur5-camera-mount/                    # Indexed eye-in-hand camera mount for UR5 (RealSense & Orbbec)
@@ -15,24 +16,25 @@ cad-parts/
 │   ├── robotiq-hand-e/                      # Robotiq Hand-E adaptive gripper & UR coupling models
 │   └── ur-accessories/                      # Threaded M8 wrist connector dust cap & UR control box key
 └── sensors/
-    └── orbbec-gemini-335/                   # Orbbec Gemini 335 stereo RGB-D camera STEP & STL models
+    └── orbbec-gemini-335Lg/                 # Orbbec Gemini 335Lg stereo RGB-D camera STEP & STL models
 ```
 
 ## Generating STL Files
 
-All `.scad` and `.step` / `.stp` files can be batch-converted into `.stl` meshes using the helper script in `scripts/` (requires [OpenSCAD](https://openscad.org) for `.scad` files and Python `cadquery` in `~/.venv-cad` or system Python for `.step` / `.stp` files):
+All `.scad` and `.step` / `.stp` files can be batch-converted into `.stl` meshes using the helper script in `scripts/` (see [scripts/README.md](scripts/README.md) for setup instructions):
 
 ```bash
 chmod +x scripts/render_stl.sh
 
-# Render a specific project folder or single file:
-./scripts/render_stl.sh sensors/orbbec-gemini-335
-
-# Or render the entire repository:
+# Render only new/missing .stl files in a specific folder or across the whole repo:
+./scripts/render_stl.sh sensors/orbbec-gemini-335Lg
 ./scripts/render_stl.sh .
+
+# Force re-render existing .stl files (-f / --force):
+./scripts/render_stl.sh -f robotics/ur5-camera-mount
 ```
 
-The script automatically scans `*/scad/` (skipping `*assembly*.scad` files) and `*/step/` directories, outputting the compiled `.stl` meshes into the corresponding `*/stl/` folder.
+The script automatically scans `*/scad/` (skipping `*assembly*.scad` files) and `*/step/` directories, skipping existing meshes unless `-f` is specified.
 
 ## Projects
 
@@ -43,4 +45,5 @@ The script automatically scans `*/scad/` (skipping `*assembly*.scad` files) and 
 * **[Universal Robots Wrist & Control Box Accessories](robotics/ur-accessories/):** Parametric **M8 × 1.0** threaded protective dust cap for the e-Series wrist tool port and a **3 mm / 5 mm double-bit** Rittal cabinet key for UR control boxes.
 
 ### Sensors
-* **[Orbbec Gemini 335 Stereo Depth Camera](sensors/orbbec-gemini-335/):** Official vendor STEP model and STL mesh for the Orbbec Gemini 335 active stereo RGB-D camera (`60.5 mm` asymmetric rear M4 mounting pattern).
+* **[Orbbec Gemini 335Lg Stereo Depth Camera](sensors/orbbec-gemini-335Lg/):** Official vendor STEP model and STL mesh for the Orbbec Gemini 335Lg IP65 active/passive stereo RGB-D camera (`95 mm` baseline, GMSL2 / USB3).
+
