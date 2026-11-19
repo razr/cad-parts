@@ -1,6 +1,6 @@
 # Universal Robots Wrist & Control Box Accessories
 
-Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Robots (`CB-Series` & `e-Series`) wrist accessories and control box hardware.
+Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Robots (`CB-Series` & `e-Series`) wrist accessories, alignment dowel pins, and control box hardware.
 
 ---
 
@@ -10,11 +10,15 @@ Parametric **OpenSCAD** models and ready-to-print **STL** files for Universal Ro
 ur-accessories/
 ├── README.md
 ├── scad/
-│   ├── m8_connector_cap.scad     # Parametric M8 x 1.0 threaded protective dust cap
-│   └── ur_control_box_key.scad   # Rittal double-bit (3 mm / 5 mm) control box cabinet key
+│   ├── m8_connector_cap.scad        # Parametric M8 x 1.0 threaded protective dust cap
+│   ├── ur_control_box_key.scad      # Rittal double-bit (3 mm / 5 mm) control box cabinet key
+│   ├── ur5_alignment_pin_6x12.scad  # Ø 6.0 x 12.0 mm ISO 9409-1-50 flange alignment dowel pin
+│   └── ur5_alignment_pin_6x20.scad  # Ø 6.0 x 20.0 mm extended stack alignment dowel pin
 └── stl/
     ├── m8_connector_cap.stl
-    └── ur_control_box_key.stl
+    ├── ur_control_box_key.stl
+    ├── ur5_alignment_pin_6x12.stl
+    └── ur5_alignment_pin_6x20.stl
 ```
 
 ---
@@ -52,3 +56,18 @@ Replacement **Rittal double-bit** cabinet key (`SZ 2531.000` style) for opening 
 #### 3D Printing Recommendations
 * **Orientation:** Print **flat on its side** on the build plate (as modeled) so continuous filament loops run along the shaft and resist twisting torque.
 * **Strength Settings:** Use **PETG**, **PETG-CF**, or **ASA** with **5 perimeter walls** and **100% infill**.
+
+---
+
+### 3. ISO 9409-1-50 Flange Alignment Dowel Pins (`ur5_alignment_pin_6x12.scad` & `6x20.scad`)
+
+Printable **Ø 6.0 mm** (DIN 7 / ISO 2338 style) alignment dowel pins with **0.8 mm** lead-in end chamfers and a flat side air-relief channel for easy insertion into the UR5 tool flange index hole.
+
+| File | Dimensions | Use Case |
+| :--- | :--- | :--- |
+| **`ur5_alignment_pin_6x12.scad`** | **Ø 5.95 mm × 12.0 mm** | Standard direct mount between the UR5 tool flange (`6.0 mm` depth) and **Part 1** of the camera mount |
+| **`ur5_alignment_pin_6x20.scad`** | **Ø 5.95 mm × 20.0 mm** | Extended stack pin bridging the **Vention ISO 50 Adaptor → Part 1 Housing → Robotiq Coupling** |
+
+#### 3D Printing & Hardware Notes
+* **Orientation:** Modeled **horizontally** on the build plate so filament layers run lengthwise along the pin and resist shear forces.
+* **Production Upgrade:** For heavy payloads or high-speed robot motion, replace printed pins with hardened stainless steel **DIN 7 / ISO 2338 Ø 6 × 12 mm** or **6 × 20 mm** dowel pins.
