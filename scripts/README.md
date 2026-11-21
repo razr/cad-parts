@@ -18,7 +18,7 @@ sudo apt update && sudo apt install -y openscad
 sudo apt install python3.14-venv
 python3 -m venv ~/.venv-cad
 source ~/.venv-cad/bin/activate
-~/.venv-cad/bin/pip install cadquery
+~/.venv-cad/bin/pip install cadquery trimesh
 ```
 
 ---
