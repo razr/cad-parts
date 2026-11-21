@@ -15,7 +15,9 @@ sudo apt update && sudo apt install -y openscad
 
 ### 2. Install CadQuery in a Virtual Environment (for `.step` / `.stp` files)
 ```bash
+sudo apt install python3.14-venv
 python3 -m venv ~/.venv-cad
+source ~/.venv-cad/bin/activate
 ~/.venv-cad/bin/pip install cadquery
 ```
 
