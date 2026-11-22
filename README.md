@@ -19,7 +19,8 @@ cad-parts/
 ├── sensors/
 │   └── orbbec-gemini-335/                   # Orbbec Gemini 335 stereo RGB-D camera STEP & STL models
 └── workcells/
-    └── vap-demonstrator/                    # VAP demonstrator acrylic base plate & calibration blocks
+    ├── vap-demonstrator/                    # VAP demonstrator acrylic base plate & calibration blocks
+    └── ur-steel-pedestal/                   # JUGARD+KÜNSTNER 780x780x815 mm steel pedestal & GD-60F casters
 ```
 
 ## Helper Scripts
@@ -41,4 +42,4 @@ cad-parts/
 
 ### Workcells
 * **[VAP Demonstrator Workcell](workcells/vap-demonstrator/):** Machined `14" × 36" × 0.5"` (`355.6 mm × 914.4 mm × 12.7 mm`) acrylic base plate with counterbored M4 mounting patterns, plus the VAP calibration sphere pedestal and slider grip block.
-
+* **[JUGARD+KÜNSTNER Steel Robot Pedestal](workcells/ur-steel-pedestal/):** Heavy-duty **780 × 780 × 815 mm** welded steel pedestal (`Dwg 16342-0-00-00-0`) with **6 × M10 + 2 × Ø 8 mm** UR20/UR30 mounting pattern, **16 × 12 kg** counterweight plates, and **4 × Xigner / GD-60F** (`1000 kg`) leveling casters.
