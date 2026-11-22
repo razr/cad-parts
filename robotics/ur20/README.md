@@ -1,6 +1,6 @@
-# Universal Robots UR20 Collaborative Robot Arm
+# Universal Robots UR20 Collaborative Robot Arm & Controller Hardware
 
-Official **STEP** CAD assembly and **STL** mesh for the **Universal Robots UR20** (`1750 mm` reach, `20 kg` payload, **ISO 9409-1-80-6-M8** tool flange).
+Official **STEP** CAD models and **STL** meshes for the **Universal Robots UR20** (`1750 mm` reach, `20 kg` payload, **ISO 9409-1-80-6-M8** tool flange), **CB5.6 Control Box**, **3PE Teach Pendant**, and base **mounting bolt**.
 
 ---
 
@@ -11,20 +11,27 @@ ur20/
 ├── README.md
 ├── universal-robots.com_legal_terms_and_conditions_for_use_of_graphical_documentation.txt
 ├── step/
-│   └── UR20.step
+│   ├── UR20.step                 # UR20 robot arm assembly
+│   ├── CB5.6_simplified.step     # CB5.6 / e-Series Control Box (IP44 enclosure)
+│   ├── 3PE_TPe-Series.step       # 3PE Teach Pendant (PolyScope HMI with 3-position enabling switch)
+│   └── mounting-bolt.step        # Base mounting hardware
 └── stl/
-    └── UR20.stl
+    ├── UR20.stl
+    ├── CB5.6_simplified.stl
+    ├── 3PE_TPe-Series.stl
+    └── mounting-bolt.stl
 ```
 
 ---
 
-## Mechanical Specifications
+## Components Included
 
-| Parameter | Specification | Notes |
+| File | Description | Key Specifications |
 | :--- | :--- | :--- |
-| **Max Reach / Payload** | **1750 mm** / **20 kg** | **64 kg** arm weight |
-| **Base Mounting Pattern** | **6 × M10** + **2 × Ø 8.0 mm** dowels on **Ø 218.0 mm** PCD | Matches the top deck hole pattern of `workcells/ur-steel-pedestal/` |
-| **Tool Flange Interface** | **ISO 9409-1-80-6-M8** (`Ø 80 mm` PCD, `6 × M8`, `Ø 8 mm` index pin) | Connects directly to `robotics/vention-iso50-to-iso80-adaptor/` |
+| **`UR20.step`** | **UR20 Manipulator Arm** | **1750 mm** reach, **20 kg** payload, **64 kg** weight, **ISO 9409-1-80-6-M8** tool flange, **6 × M10 + 2 × Ø 8 mm** base pattern on **Ø 218 mm** PCD |
+| **`CB5.6_simplified.step`** | **CB5.6 Control Box** | **460 × 254 × 449 mm** (`W × D × H`) IP44 steel enclosure (`~12 kg`) |
+| **`3PE_TPe-Series.step`** | **3PE Teach Pendant** | **294 × 192 × 56 mm** touchscreen HMI with integrated 3-position enabling switch (`~1.6 kg`) |
+| **`mounting-bolt.step`** | **Base Mounting Bolt** | Standard base fastening hardware |
 
 ---
 
