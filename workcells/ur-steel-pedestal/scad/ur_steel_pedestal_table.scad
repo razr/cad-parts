@@ -1,6 +1,7 @@
 // ============================================================================
 // JUGARD+KÜNSTNER STEEL ROBOT PEDESTAL ("Robotergestell_Stahl") + 4x GD-60F CASTERS
-// Drawing No.: 16342-0-00-00-0 | Compatible with UR20 / UR30 (6x M10 + 2x Dowels)
+// Drawing No.: 16342-0-00-00-0 | Total Height with Casters: 815.0 mm
+// Compatible with UR20 / UR30 Base (Center Cable Hole + 6x M10 + 2x Dowels)
 // Units: millimeters (mm)
 // ============================================================================
 
@@ -12,20 +13,21 @@ $fn = 64;
 show_side_panels    = true;  // 4x removable sheet-metal side panels (Seitenverkleidung)
 show_counterweights = true;  // 16x removable 12 kg steel counterweight plates inside base
 show_casters        = true;  // 4x Xigner / GD-60F 1000 kg heavy-duty leveling casters
-caster_foot_ext     = 0.0;   // [0:1:10] 0 mm = rolling on wheels; 4..10 mm = leveled on pads
+caster_foot_ext     = 0.0;   // [0:1:10] 0 mm = rolling on wheels (815 mm total); 4..10 mm = leveled
 explode_panels      = 0;     // [0:10:150] Exploded offset for removable side panels (mm)
 
-// --- Main Overall Dimensions (from Dwg 16342-0-00-00-0) ---
+// --- Main Overall Dimensions ---
 table_w             = 780.0; // Top plate width (X)
 table_d             = 780.0; // Top plate depth (Y)
-frame_h             = 775.0; // Steel pedestal height without casters (775 mm)
+total_height        = 815.0; // Master total height from floor to top of 10 mm steel deck (815.0 mm)
+caster_base_h       = 82.0;  // GD-60F rolling height (82.0 mm)
+frame_h             = show_casters ? (total_height - caster_base_h) : total_height; // 733.0 mm frame
 top_plate_t         = 10.0;  // 10 mm steel top plate ("Stahlplatte 10mm mit Bohrbild")
 leg_inset           = 32.5;  // Frame inset from 780 mm top plate edge ((780 - 715) / 2 = 32.5 mm)
 frame_w             = table_w - 2 * leg_inset; // 715.0 mm outer frame width/depth
 tube_size           = 60.0;  // 60 x 60 mm square structural steel tubing
-foot_plate_h        = 100.0; // Bottom plinth height
+foot_plate_h        = 90.0;  // Bottom plinth clearance above caster plate
 bottom_plate_t      = 8.0;   // Welded base pan ("Bodenplatte verschweißt, ca. 25kg")
-caster_base_h       = 82.0;  // GD-60F rolling height (82 mm)
 
 // --- UR20 / UR30 Base Mounting Pattern (Center Cable Hole + 8 PCD Holes) ---
 ur_cable_hole_d     = 45.0;  // Center cable pass-through bore at (0, 0)
@@ -36,7 +38,7 @@ ur_dowel_d          = 8.0;   // 2x extra Ø 8.0 mm dowel alignment pin holes (at
 // --- 16x Removable Counterweight Plates ("16x Gewichtsplatten einlegbar, ca. 12kg") ---
 cw_w                = 260.0;
 cw_d                = 180.0;
-cw_t                = 32.0;  // ~12 kg steel block each
+cw_t                = 32.0;  // ~12 kg steel block each (260 x 180 x 32 mm ≈ 11.8 kg)
 
 // --- 4x Removable Side Panels ("4x Seitenverkleidung abnehmbar") ---
 panel_t             = 2.0;
@@ -49,7 +51,7 @@ module square_tube_z(len, size) { cube([size, size, len]); }
 
 module ur_steel_pedestal_table() {
     z_lift = show_casters ? (caster_base_h + max(0, caster_foot_ext - 4.0)) : 0.0;
-    deck_z = frame_h - top_plate_t; // 765.0 mm relative to frame bottom
+    deck_z = frame_h - top_plate_t; // 723.0 mm relative to frame bottom -> 805.0 mm from floor
 
     // Mount 4x Leveling Casters under the 4 Corner Posts
     if (show_casters) {
@@ -62,7 +64,7 @@ module ur_steel_pedestal_table() {
     }
 
     translate([0, 0, z_lift]) {
-        // 1. 10 mm Steel Top Plate
+        // 1. 10 mm Steel Top Plate (Top surface sits at Z = 815.0 mm)
         color("SlateGray")
         difference() {
             translate([-table_w / 2, -table_d / 2, deck_z])
